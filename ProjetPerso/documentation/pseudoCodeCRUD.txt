@@ -1,0 +1,95 @@
+Create:
+
+Début <Create>
+Si: <btnSauvegarder a été appuyé>;
+  Si: <Prenom != vide et Nom != vide et Pays d'Origine != vide et Annee != vide
+      et Constructeur != vide et Pneu != vide et Chassis != vide et Moteur != vide>
+          alors:  <Prenom> <- <valeur textBox "prénom">
+                  <Nom> <- <valeur textBox "nom">
+                  <Pays d'origine> <- <valeur textBox "pays d'origine">
+                  <Année> <- <valeur numérique de la textBox "année">
+                  <Constructeur> <- <valeur textBox "constructeur">
+                  <Pneu> <- <valeur textBox "pneu">
+                  <Châssis> <- <valeur textBox "châssis">
+                  <Moteur> <- <valeur textBox "moteur">
+
+                  <insertionDansBDD> <- <exécution(tableau(Prenom, Nom, Pays d'Origine,
+                  Pneu, Châssis, Moteur))>;
+
+  Sinon:  afficher <"Veuillez remplir tout les champs">;
+  Fin Si;
+Fin Si;
+Fin <Create>
+
+
+
+Read:
+
+Début <Read>
+<resultat> <- <votreBDD -> requete('SELECT * FROM votreTable')>;
+Tant que: <donnéesAffichées> <- <resultat -> assembler()>;
+Faire:  afficher dans cellule <donnéesAffichées[Prenom]>
+        afficher dans cellule <donnéesAffichées[Nom]>
+        afficher dans cellule <donnéesAffichées[Pays d'origine]>
+        afficher dans cellule <donnéesAffichées[Annee]>
+        afficher dans cellule <donnéesAffichées[Constructeur]>
+        afficher dans cellule <donnéesAffichées[Pneu]>
+        afficher dans cellule <donnéesAffichées[Châssis]>
+        afficher dans cellule <donnéesAffichées[Moteur]>
+Fin Tant que;
+Fin <Read>
+
+
+
+Update:
+
+Début <Update>
+Si: <btnModifier a été appuyé>;
+alors:  <id> <- <valeur numérique de la ligne sélectionnée>
+        <mettre à jour> <- <Vrai>
+        <requete> <- <votreBDD -> requete("SELECT * FROM votreTable WHERE votreIdBDD = 'id'")>
+
+        Si: <Nombre(requete) == 1>
+          Tant que: <donnees> <- <requete -> assembler()>
+                  <PrenomTextBox> <- <donnéesAffichées[Prenom]>
+                  <NomTextBox> <- <donnéesAffichées[Nom]>
+                  <Pays d'OrigineTextBox> <- <donnéesAffichées[Pays d'origine]>
+                  <AnneeTextBox> <- <donnéesAffichées[Annee]>
+                  <ConstructeurTextBox> <- <donnéesAffichées[Constructeur]>
+                  <PneuTextBox> <- <donnéesAffichées[Pneu]>
+                  <ChassisTextBox> <- <donnéesAffichées[Châssis]>
+                  <MoteurTextBox> <- <donnéesAffichées[Moteur]>
+          Fin Tant que;
+        Fin Si;
+Fin Si;
+
+Si: <btnMettreAJour a été appuyé>;
+alors:  <id> <- <valeur numérique de la ligne sélectionnée précedemment>
+        <prenom> <- <valeur rentrée dans le formulaire>
+        <nom> <- <valeur rentrée dans le formulaire>
+        <pays d'origine> <- <aleur rentrée dans le formulaire>
+        <annee> <- <aleur rentrée dans le formulaire>
+        <constructeur> <- <aleur rentrée dans le formulaire>
+        <pneu> <- <aleur rentrée dans le formulaire>
+        <chassis> <- <valeur rentrée dans le formulaire>
+        <moteur> <- <valeur rentrée dans le formulaire>
+
+        <MettreAJourRequete> <- <votreBDD -> requete("UPDATE votreTable SET
+        prenom = '<prenom>', nom = '<nom>', pays d'origine= '<pays d'origine>',
+        annee = '<annee>', constructeur = '<constructeur>', pneu = '<pneu>',
+        chassis = '<chassis>', moteur = '<moteur>''")
+
+        <mettre à jour> <- <Faux>
+Fin Si;
+Fin <Update>
+
+
+Delete:
+
+Début <Delete>
+Si: <btnEffacer a été appuyé>;
+alors:  <id> <- <valeur numérique de la ligne sélectionnée précedemment>
+        <effaceRequete> <- <votreBDD -> requete("DELETE FROM votreTable WHERE
+        votreIdBDD = 'id'")
+Fin si;
+Fin <Delete>

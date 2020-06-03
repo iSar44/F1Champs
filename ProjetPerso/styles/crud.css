@@ -1,0 +1,55 @@
+body{
+    margin-top: 20px;
+
+
+}
+
+
+#container {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    width: 75%;
+    height: 327px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+
+
+th {
+    font-size: 16px;
+}
+
+td{
+    font-size: 15px;
+}
+
+
+form{
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-color: #C0C3EB;
+    border: 1px solid #bbbbbb;
+    width: 50%;
+    height: 420px;
+    overflow-y: scroll;
+
+
+}
+
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    background-color: #C0D8EB;
+}
